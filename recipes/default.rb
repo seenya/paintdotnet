@@ -27,17 +27,23 @@
 if node['platform_family'] == 'windows'
 	# Cache zip file and unzip it locally.
 
-	unpackedInstaller = "C:\\Temp\\#{['paintdotnet']['filename']}.exe"
-
-	windows_zipfile unpackedInstaller do
-  		source node['paintdotnet']['url']
+	unpackDir = node['paintdotnet']['unzipdir']
+	unpackedInstaller = "#{unpackDir}/#{node['paintdotnet']['filename']}.exe"
+	
+	windows_zipfile unpackDir do
+  		source node['paintdotnet']['downloadurl']
   		action :unzip
   		not_if {::File.exists?(unpackedInstaller)}
 	end
 
+	#TODO Call exe with /createMsi parameter and then call the x86 or x64 
+	#       version depending on the system.
+	#     Current implementation shows a progress UI.
+
 	windows_package node['paintdotnet']['package_name'] do
   		source unpackedInstaller
   		checksum node['paintdotnet']['checksum']
+  		options '/auto'
   		action :install
 	end
 end
