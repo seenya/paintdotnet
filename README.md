@@ -44,8 +44,8 @@ Windows
   <tr>
     <td><tt>['paintdotnet']['package_name']</tt></td>
     <td>String</td>
-    <td>THe name of the package in add/remove programs</td>
-    <td><tt>Paint.Net v&lt;Version&gt;</tt></td>
+    <td>The name of the package in add/remove programs</td>
+    <td><tt>Paint.Net v&lt;version&gt;</tt></td>
   </tr>
 </table>
 
