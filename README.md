@@ -1,6 +1,8 @@
 # paintdotnet-cookbook
 
 This cookbook installs Paint.Net on the windows platform.
+Currently it displays a UI with a progress bar, it is not 
+a true unattended install.
 
 ## Supported Platforms
 
@@ -16,10 +18,34 @@ Windows
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['paintdotnet']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['paintdotnet']['version']</tt></td>
+    <td>String</td>
+    <td>Version number in the format X.X.X</td>
+    <td><tt>4.0.1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['paintdotnet']['unzipdir']</tt></td>
+    <td>String</td>
+    <td>The location where the paint.net zip file will be unzipped to.</td>
+    <td><tt>C:/Temp</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['paintdotnet']['downloadurl']</tt></td>
+    <td>String</td>
+    <td>The URL to download the source zipped installer from..</td>
+    <td><tt>http://www.dotpdn.com/files/paint.net.&lt;version&gt;.install.zip</tt></td>
+  </tr>
+ <tr>
+    <td><tt>['paintdotnet']['checksum']</tt></td>
+    <td>String</td>
+    <td>The checksum used to verify the unzipped installer.</td>
+    <td><tt>66d32ad200d9e736b162e3272db0c70d7a043020</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['paintdotnet']['package_name']</tt></td>
+    <td>String</td>
+    <td>THe name of the package in add/remove programs</td>
+    <td><tt>Paint.Net v&lt;Version&gt;</tt></td>
   </tr>
 </table>
 
