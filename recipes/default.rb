@@ -23,3 +23,16 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+
+if node['platform_family'] == 'windows'
+	# Cache zip file and unzip it locally.
+
+	unpackedInstaller = node['paintdotnet']['url']
+
+
+	windows_package node['paintdotnet']['package_name'] do
+  		source node['paintdotnet']['url']
+  		checksum node['paintdotnet']['checksum']
+  		action :install
+	end
+end

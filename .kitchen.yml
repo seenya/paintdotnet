@@ -6,11 +6,10 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: WIN8_X64_PRO
+  - name: WIN7_X64_PRO
 
 suites:
   - name: default
-    run_list:
-    	- recipe[paintdotnet::default]
+    run_list: ["recipe[paintdotnet]"]
     attributes:

@@ -19,4 +19,8 @@ group :development do
 	gem 'kitchen-vagrant'
 	gem 'guard'
 	gem 'guard-kitchen'
+	gem 'guard-rspec'
+	gem 'rspec'
+	gem 'chefspec'
+	gem 'foodcritic'
 end
