@@ -27,11 +27,16 @@
 if node['platform_family'] == 'windows'
 	# Cache zip file and unzip it locally.
 
-	unpackedInstaller = node['paintdotnet']['url']
+	unpackedInstaller = "C:\\Temp\\#{['paintdotnet']['filename']}.exe"
 
+	windows_zipfile unpackedInstaller do
+  		source node['paintdotnet']['url']
+  		action :unzip
+  		not_if {::File.exists?(unpackedInstaller)}
+	end
 
 	windows_package node['paintdotnet']['package_name'] do
-  		source node['paintdotnet']['url']
+  		source unpackedInstaller
   		checksum node['paintdotnet']['checksum']
   		action :install
 	end
