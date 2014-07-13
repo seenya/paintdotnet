@@ -25,25 +25,32 @@
 #
 
 if node['platform_family'] == 'windows'
-	# Cache zip file and unzip it locally.
-
-	unpackDir = node['paintdotnet']['unzipdir']
-	unpackedInstaller = "#{unpackDir}/#{node['paintdotnet']['filename']}.exe"
 	
-	windows_zipfile unpackDir do
-  		source node['paintdotnet']['downloadurl']
-  		action :unzip
-  		not_if {::File.exists?(unpackedInstaller)}
-	end
+	
+	if not File.exists?('C:/Program Files/paint.net/PaintDotNet.exe')
 
-	#TODO Call exe with /createMsi parameter and then call the x86 or x64 
-	#       version depending on the system.
-	#     Current implementation shows a progress UI.
+		# Cache zip file and unzip it locally.
+		unpackDir = node['paintdotnet']['unzipdir']
+		unpackedInstaller = "#{unpackDir}/#{node['paintdotnet']['filename']}.exe"
+		
+		windows_zipfile unpackDir do
+	  		source node['paintdotnet']['downloadurl']
+	  		action :unzip
+	  		not_if {::File.exists?(unpackedInstaller)}
+		end
 
-	windows_package node['paintdotnet']['package_name'] do
-  		source unpackedInstaller
-  		checksum node['paintdotnet']['checksum']
-  		options '/auto'
-  		action :install
+		#TODO Call exe with /createMsi parameter and then call the x86 or x64 
+		#       version depending on the system.
+		# 	  Except... the msis are created on the desktop, and this shows a UI
+		#      which means I'd have to bundle the MSI with the cookbook. Yuk!
+
+		#     Current implementation shows a progress UI.
+
+		windows_package node['paintdotnet']['package_name'] do
+	  		source unpackedInstaller
+	  		checksum node['paintdotnet']['checksum']
+	  		options '/auto'
+	  		action :install
+		end
 	end
 end
